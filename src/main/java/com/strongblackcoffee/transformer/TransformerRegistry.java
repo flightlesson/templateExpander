@@ -1,5 +1,6 @@
 package com.strongblackcoffee.transformer;
 
+import com.strongblackcoffee.transformer.function.TransformerTr;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,14 +26,7 @@ public class TransformerRegistry {
             @Override public int getMaxArgs() { return 0; }
             @Override public String transform(String raw, List<String> args) { return raw.toUpperCase(); }
         });
-        register("tr", new Transformer() {
-            @Override public String getName() { return "tr"; }
-            @Override public String getDescription() { return "tr:[a-zA-Z]:[n-za-mN-ZA-M] does a ROT13 transformation."; }
-            @Override public int getMinArgs() { return 2;}
-            @Override public int getMaxArgs() { return 2; }
-            @Override public String transform(String raw, List<String> args) { return raw.toUpperCase(); 
-            }
-        });
+        register("tr", new TransformerTr());
     }
     
     private Map<String,Transformer> registry = new TreeMap<>();
