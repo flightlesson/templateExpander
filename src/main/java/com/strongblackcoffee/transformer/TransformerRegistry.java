@@ -12,20 +12,6 @@ import java.util.TreeMap;
 public class TransformerRegistry {
     
     public TransformerRegistry() {
-        register("lowercase", new Transformer() {
-            @Override public String getName() { return "lowercase"; }
-            @Override public String getDescription() { return "Converts all chars to lowercase."; }
-            @Override public int getMinArgs() { return 0;}
-            @Override public int getMaxArgs() { return 0; }
-            @Override public String transform(String raw, List<String> args) { return raw.toLowerCase(); }
-        });
-        register("uppercase", new Transformer() {
-            @Override public String getName() { return "uppercase"; }
-            @Override public String getDescription() { return "Converts all chars to uppercase."; }
-            @Override public int getMinArgs() { return 0;}
-            @Override public int getMaxArgs() { return 0; }
-            @Override public String transform(String raw, List<String> args) { return raw.toUpperCase(); }
-        });
         register("tr", new TransformerTr());
     }
     

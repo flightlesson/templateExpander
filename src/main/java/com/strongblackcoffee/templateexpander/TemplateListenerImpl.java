@@ -11,6 +11,7 @@ import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.antlr.v4.runtime.tree.TerminalNode;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * 
@@ -115,25 +116,11 @@ class TemplateListenerImpl implements TemplateListener {
         if (valueList == null) {
             expansion.append(ctx.getText());
         } else {
-            StringBuilder replacement = new StringBuilder();
-            String spacer = "";
-            for (String value: valueList) {
-                if (verbose) System.out.println("... ... value="+value);
-                String transformedValue = value;
-                for (Transformation t: transformations) {
-                    if (verbose) System.out.println("... ... ... applying " + t.toString());
-                    Transformer transformer = transformerFactory.getTransformer(t.name);
-                    if (transformer == null) {
-                        transformedValue = transformedValue + "|" + t.toString();
-                    } else {
-                        transformedValue = transformer.transform(transformedValue, t.args);
-                    }
-                }
-                replacement.append(spacer + transformedValue);
-                spacer = " ";
+            for (Transformation t: transformations) {
+                Transformer transformer = transformerFactory.getTransformer(t.name);
+                valueList = transformer.transform(valueList, t.args);
             }
-            if (verbose) System.out.println("... ... expanding to \""+replacement.toString()+"\"");
-            expansion.append(replacement.toString());
+            expansion.append(StringUtils.join(valueList, " "));
         }
     }
     

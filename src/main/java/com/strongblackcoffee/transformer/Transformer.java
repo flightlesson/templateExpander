@@ -18,6 +18,6 @@ public interface Transformer {
      * @param args 
      * @return 
      */
-    public String transform(String raw, List<String> args);
+    public List<String> transform(List<String> raw, List<String> args);
     
 }

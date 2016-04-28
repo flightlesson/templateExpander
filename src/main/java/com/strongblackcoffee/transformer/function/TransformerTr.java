@@ -1,6 +1,7 @@
 package com.strongblackcoffee.transformer.function;
 
 import com.strongblackcoffee.transformer.Transformer;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.CharSet;
 import org.apache.commons.lang3.StringUtils;
@@ -31,10 +32,14 @@ public class TransformerTr implements Transformer {
     }
 
     @Override
-    public String transform(String raw, List<String> args) {
+    public List<String> transform(List<String> rawList, List<String> args) {
         String searchChars  = expandRanges(args.get(0));
         String replaceChars = expandRanges(args.get(1));
-        return StringUtils.replaceChars(raw,searchChars,replaceChars);
+        List<String> results = new ArrayList<>();
+        for (String raw: rawList) {
+            results.add( StringUtils.replaceChars(raw,searchChars,replaceChars) );
+        }
+        return results;
     }
     
     static String expandRanges(String unexpanded) {

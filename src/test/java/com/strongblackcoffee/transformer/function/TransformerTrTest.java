@@ -40,11 +40,22 @@ public class TransformerTrTest {
     public void tearDown() {
     }
 
-    @Test public void testTransform01() { performTransformTest("abcabc",new String[] {"bcd","ghi"},"aghagh"); }
-    @Test public void testTransform02() { performTransformTest("Happiness",new String[] {"a-zA-Z","n-za-mN-ZA-M"},"Unccvarff"); }
+    @Test public void testTransform01() { 
+        performTransformTest(new String[] {"abcabc"}, 
+                new String[] {"bcd","ghi"}, 
+                new String[] {"aghagh"}); 
+    }
     
-    void performTransformTest(String initial, String[] args, String expected) {
-        assertEquals(initial,expected,(new TransformerTr()).transform(initial, Arrays.asList(args)));
+    @Test public void testTransform02() { 
+        performTransformTest(new String[] {"Happiness"}, 
+                new String[] {"a-zA-Z","n-za-mN-ZA-M"},
+                new String[] {"Unccvarff"}); 
+    }
+    
+    void performTransformTest(String[] initial, String[] args, String[] expected) {
+        assertEquals(Arrays.asList(initial).toString(),
+                     Arrays.asList(expected).toString(),
+                     (new TransformerTr()).transform(Arrays.asList(initial), Arrays.asList(args)).toString());
     }
 
     @Test public void testExpandRanges01() { performExpandRangesTest("a-h","abcdefgh"); }

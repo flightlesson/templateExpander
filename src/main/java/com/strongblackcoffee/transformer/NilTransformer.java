@@ -28,7 +28,7 @@ public class NilTransformer implements Transformer {
     }
 
     @Override
-    public String transform(String raw, List<String> args) {
+    public List<String> transform(List<String> raw, List<String> args) {
         return raw;
     }
     
