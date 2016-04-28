@@ -1,0 +1,19 @@
+Inspired by an application that used templates like
+
+       "cp {files} {dest-dir}"
+
+where {files} is replaced with the appropriate space-seperated list of
+files and {dest-dir} with the appropriate destination directory, this
+is a utility for expanding such templates.
+
+Templates have zero or more replaceables -- things like {files} and {dest-dir}.
+
+Replaceables can be more complex: {word|uppercase} gets replaced with
+the value of word, converted to uppercase. So if word's value is
+elephant, {word|upperase} gets replaced with ELEPHANT. Here, uppercase is a
+transformation.
+
+Transformations can take arguments. {word|tr:[a-zA-Z]:[n-za-mN-ZA-M]}
+gets replaced with ryrcunag. Here, the tr transformation's two
+arguments are [a-zA-Z] and [n-za-mN-ZA-M].
+
